@@ -1,0 +1,16 @@
+# See https://atom.io/docs/latest/creating-a-package#menus for more details
+'context-menu':
+  '.overlayer':
+      'Enable yo': 'yo:toggle'
+
+'menu': [
+  {
+    'label': 'Packages'
+    'submenu': [
+      'label': 'yo'
+      'submenu': [
+        { 'label': 'Send', 'command': 'yo:yo' }
+      ]
+    ]
+  }
+]
