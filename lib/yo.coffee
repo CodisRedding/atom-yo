@@ -1,6 +1,7 @@
 req = require 'request'
 
 module.exports =
+  clearTime: 5000
   configDefaults:
     yoApiKey: ""
 
@@ -19,47 +20,53 @@ module.exports =
         api_token: atom.config.get('yo.yoApiKey')
         username: selection.getText()
 
-    @set 'sent yo! [' + selection.getText() + ']', 2000
+    @set 'sent yo! [' + selection.getText() + ']', @clearTime
 
   yolink: ->
     editor = atom.workspace.activePaneItem
     selection = editor.getSelection()
     parts = selection.getText().split(' ')
+    username = parts[0]
+    link = parts[1]
     self = this
+
     req.post "http://api.justyo.co/yo",
       form:
         api_token: atom.config.get('yo.yoApiKey')
-        username: parts[0]
-        link: parts[1],
+        username: username
+        link: link
       optionalCallback = (err, httpResponse, body) ->
-        if err || body == null || body.contains('Rate limit exceeded') || body.contains('error')
-          self.set 'error: ' + body, 2000
+        if self.haserror err, body
+          self.set 'error: ' + body, self.clearTime
           return
-        console.log 'body: ' + body
-        self.set 'sent yo w/' + parts[1] + ' to ' + parts[0], 2000
+        self.set 'sent yo w/' + link + ' to ' + username, self.clearTime
 
   yoall: ->
     self = this
+
     req.post "http://api.justyo.co/yoall",
       form:
         api_token: atom.config.get('yo.yoApiKey'),
       optionalCallback = (err, httpResponse, body) ->
-        if err || body == null || body.contains('Rate limit exceeded') || body.contains('error')
-          self.set 'error: ' + body, 2000
+        if self.hasError err, body
+          self.set 'error: ' + body, self.clearTime
           return
-        self.set 'sent yo to all!', 2000
+        self.set 'sent yo to all!', self.clearTime
 
   count: ->
     self = this
     req.get "http://api.justyo.co/subscribers_count?api_token=" + atom.config.get('yo.yoApiKey'),
       optionalCallback = (err, httpResponse, body) ->
         return console.error err if err
-        console.log (JSON.parse(body)).result
-        self.set 'subscribers: ' + (JSON.parse(body)).result, 2000
+        self.set 'subscribers: ' + (JSON.parse(body)).result, self.clearTime
 
   set: (msg, to) ->
+    atom.workspaceView.statusBar?.find('.status-class').remove()
     atom.workspaceView.statusBar?.appendLeft('<span class="status-class">' + msg + '</span>')
     setTimeout @clear, to
 
   clear: ->
     atom.workspaceView.statusBar?.find('.status-class').remove()
+
+  hasError: (err, body) ->
+    return err || body == null || body.contains('Rate limit exceeded') || body.contains('error')
