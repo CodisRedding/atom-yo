@@ -29,7 +29,6 @@ module.exports =
     username = parts[0]
     link = parts[1]
     self = this
-
     req.post "http://api.justyo.co/yo",
       form:
         api_token: atom.config.get('yo.yoApiKey')
@@ -43,7 +42,6 @@ module.exports =
 
   yoall: ->
     self = this
-
     req.post "http://api.justyo.co/yoall",
       form:
         api_token: atom.config.get('yo.yoApiKey'),
