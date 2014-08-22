@@ -16,6 +16,3 @@ You just finished writing your last unit test, and it passed! Time to Yo everyon
 
 #cmd-alt-l
 Share a link with a friend. Just type out their Yo name, a space, and the url then highlight them both.
-
-
-![A screenshot of your spankin' package](https://f.cloud.github.com/assets/69169/2290250/c35d867a-a017-11e3-86be-cd7c5bf3ff9b.gif)
