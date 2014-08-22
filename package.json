@@ -4,7 +4,7 @@
   "version": "0.0.0",
   "description": "A short description of your package",
   "activationEvents": ["yo:yo", "yo:count", "yo:yoall", "yo:yolink"],
-  "repository": "https://github.com/atom/yo",
+  "repository": "https://github.com/fourq/atom-yo",
   "license": "MIT",
   "engines": {
     "atom": ">0.50.0"

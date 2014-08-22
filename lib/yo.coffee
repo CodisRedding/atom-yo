@@ -1,6 +1,4 @@
 req = require 'request'
-yoview = require './yo-view'
-view = new yoview()
 
 module.exports =
   configDefaults:
