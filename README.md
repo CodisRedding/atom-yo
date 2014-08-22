@@ -1,6 +1,8 @@
 #Setup
 All you have to do is add your Yo API key. (http://dev.justyo.co/) ATOM > Preferences > find the Yo package and paste it in.
 
+![Yo API key package setting](http://screencast.com/t/iYGVv3TIsz0)
+
 #cmd-alt-y
 Say your coding and all of a sudden you think of your swell pal jhersh. All you do is type out jhersh's Yo name, highlight it and use this keymap.
 
