@@ -1,7 +1,7 @@
 {
   "name": "yo",
   "main": "./lib/yo",
-  "version": "0.4.0",
+  "version": "0.5.0",
   "description": "Yo while you code.",
   "activationEvents": [
     "yo:yo",
