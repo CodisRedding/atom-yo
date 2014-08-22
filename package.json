@@ -2,7 +2,7 @@
   "name": "yo",
   "main": "./lib/yo",
   "version": "0.3.0",
-  "description": "A short description of your package",
+  "description": "Yo while you code.",
   "activationEvents": [
     "yo:yo",
     "yo:count",
