@@ -13,14 +13,17 @@ module.exports =
 
   yo: ->
     editor = atom.workspace.activePaneItem
-    selection = editor.getSelection()
-
+    username = editor.getSelection().getText()
+    self = this
     req.post "http://api.justyo.co/yo",
       form:
         api_token: atom.config.get('yo.yoApiKey')
-        username: selection.getText()
-
-    @set 'sent yo! [' + selection.getText() + ']', @clearTime
+        username: username
+      optionalCallback = (err, httpResponse, body) ->
+        if self.hasError err, body
+          self.set 'error: ' + body, self.clearTime
+          return
+        self.set 'sent yo to ' + username, self.clearTime
 
   yolink: ->
     editor = atom.workspace.activePaneItem
@@ -35,10 +38,10 @@ module.exports =
         username: username
         link: link
       optionalCallback = (err, httpResponse, body) ->
-        if self.haserror err, body
+        if self.hasError err, body
           self.set 'error: ' + body, self.clearTime
           return
-        self.set 'sent yo w/' + link + ' to ' + username, self.clearTime
+        self.set 'sent yo with the link ' + link + ' to ' + username, self.clearTime
 
   yoall: ->
     self = this
@@ -49,7 +52,7 @@ module.exports =
         if self.hasError err, body
           self.set 'error: ' + body, self.clearTime
           return
-        self.set 'sent yo to all!', self.clearTime
+        self.set 'sent yo to everyone', self.clearTime
 
   count: ->
     self = this
