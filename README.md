@@ -1,7 +1,3 @@
-# yo package
-
-Yo while you code.
-
 #Setup
 All you have to do is add your Yo API key. (http://dev.justyo.co/) ATOM > Preferences > find the Yo package and paste it in.
 
